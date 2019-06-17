@@ -1,6 +1,6 @@
-/* .Income-container{
+.Income-container{
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    /* //grid-template-rows: 1fr 1fr 1fr fr; */
     align-items: center;
     justify-items: center;
-} */
+}

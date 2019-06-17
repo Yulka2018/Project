@@ -36,7 +36,7 @@ let getIncomeReduser = (state, action) => {
     return { income: []}
   }
   if (action.type === "GET_INCOME"){
-    let income = action.payload
+    let income = action.payload ? action.payload : state.income
     // console.log(allCategories)
     // console.log(action.status)
     if(action.status === "PENDING"){
@@ -49,25 +49,69 @@ let getIncomeReduser = (state, action) => {
 
 let getCostsReduser = (state, action) => {
   if(state === undefined){
-    return { costs: []}
+    return { costs: [], message: ''}
   }
   if (action.type === "GET_COSTS"){
-    let costs = action.payload
+    let costs = action.payload ? action.payload : state.costs
+    let msg
     // console.log(allCategories)
     // console.log(action.status)
     if(action.status === "PENDING"){
       costs = state.costs
     }
-    return {...state, costs: costs}
+    if(action.status === 'REJECTED'){
+      msg = action.error
+    }
+    return {...state, costs: costs, message: msg}
   }
   return state
 }
+
+let userReducer = (state, action) => {
+  if (state === undefined){
+    return { signInMessage: '', signIn: false, logInMessage: '', logIn: false}
+  }
+   let signedIn
+  if(action.type === "SIGNIN_USER"){
+    let signInMsg = action.data || action.error
+    if(action.status ==="PENDING"){
+      signInMsg = state.signInMessage
+    }
+    if(action.status === 'RESOLVED'){
+      signedIn =  true
+    }
+    if(action.status === 'REJECTED'){
+      signedIn =  false
+    }
+    
+    return { ...state, signInMessage: signInMsg, signIn: signedIn}
+  }
+  
+  if(action.type === "LOGIN_USER"){
+    let logInMsg = action.data || action.error
+    let loggedIn
+    if( action.status === "PENDING"){
+      logInMsg = state.logInMessage
+    }
+    if(action.status === 'RESOLVED' ) {
+      loggedIn =  true
+    }
+    if(action.status === 'REJECTED'){
+      loggedIn =  false
+    }
+    console.log(logInMsg)
+    return { ...state, logInMessage: logInMsg, logIn: loggedIn }
+  }
+  return state
+}
+
 
 const reducers = combineReducers({
     sendData: sendDataReducer,
     getCategories: getCategoriesReduser,
     getIncome: getIncomeReduser,
     getCosts: getCostsReduser,
+    users: userReducer,
 })
 
 export const store = createStore(reducers, applyMiddleware(thunk))
@@ -76,24 +120,15 @@ store.subscribe(() => console.log(store.getState()))
 
 setInterval(
   () => store.dispatch(getCategories()),
-  8000
+  2000
 )
 
 setInterval(
   () => store.dispatch(getCosts()),
-  8000
+  9000
 )
 
 setInterval(
   () => store.dispatch(getIncome()),
-  8000
+  9000
 )
-
-// let income = state => ({data: state.getIncome.income.incomeSum})
-// console.log(income)
-// function balance (income, costs){
-//   let incomeSum = income.reduce(function(prevVal, currentVal){
-//       return prevVal+currentVal
-//   })
-//   console.log(incomeSum)
-// }

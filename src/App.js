@@ -5,9 +5,10 @@ import {store} from './Redux/Reducers.js';
 import Main from './Main/Main.js';
 import {Switch, Router, Route} from 'react-router-dom';
 import createHistory from "history/createBrowserHistory";
-import ConnectCosts from './Redux/AddCosts.js';
 import ConnectIncome from './Redux/AddIncome.js'
-import NewCategory from './Income/NewCategory.js';
+import ConnectCategory from './Redux/AddCategory.js';
+import ConnectedUser from './Redux/SignInLogIn.js'
+import Chart from './Chart/Chart.js'
 
 
 class App extends Component {
@@ -17,10 +18,12 @@ class App extends Component {
         <Router history = {createHistory()}>
           <div className="App">
             <Switch>
-              <Route path = '/'  component = {Main} exact />
+              <Route exact path = '/'  component = {Main}  />
               <Route path = '/income'  component = {ConnectIncome}/>
-              <Route path = '/newCategory'  component = {NewCategory}/>
-              <Route path = '/costs'  component = {ConnectCosts}/>
+              <Route path = '/users'  component = {ConnectedUser}/>
+              <Route path = '/newCategory'  component = {ConnectCategory}/>
+              <Route path = '/statistic'  component = {Chart}/>
+              <Route exact path = '/:nick' component={Main} />
             </Switch>  
           </div>
         </Router>

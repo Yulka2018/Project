@@ -1,17 +1,28 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './Main.css';
+import { Link } from 'react-router-dom';
 import Balance from '../Balance/Balance.js';
 import Spent from '../Balance/Spent.js';
+import User from './User'
 
-class Header extends Component{
-    render(){
-        return(
-            <div className = 'Header'>
-                    <span><img className = 'logo' src ="Logo.png" alt = 'png'></img><span>Logo</span></span>
-                    <div> 
-                        <Balance/>
-                        <Spent/>
-                    </div> 
+class Header extends Component {
+    render() {
+        let userS = JSON.parse(localStorage.getItem('user'))
+        console.log(userS)
+        if (!userS)
+            return (
+                <div className='Header'>
+                    <Link to='/users'>User</Link>
+                    <Balance />
+                    <div></div>
+                    <Spent />
+                </div>)
+        else return (
+            <div className='Header'>
+                <h4>hi {userS.nick}</h4>
+                <Balance />
+                <div></div>
+                <Spent />
             </div>
         )
     }

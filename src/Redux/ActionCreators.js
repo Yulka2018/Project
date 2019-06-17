@@ -45,3 +45,26 @@ export function  getCostsResolved(payload){
 export function  getCostsRejected(error){
   return {type: 'GET_COSTS', status: 'REJECTED', data: null, error}
 }
+
+export function actionPendingUser(){
+  return { type: 'SIGNIN_USER', status: 'PENDING', data: null, error: null }
+}
+export function actionResolvedUser(data){
+  return { type: 'SIGNIN_USER', status: 'RESOLVED', data, error: null }
+}
+
+export function actionRejectedUser(error){
+  return { type: 'SIGNIN_USER', status: 'REJECTED', data: null, error }
+}
+
+export function actionPendingUserLogin(){
+  return { type: 'LOGIN_USER', status: 'PENDING', data: null, error: null }
+}
+
+export function actionResolvedUserLogin(data){
+  return { type: 'LOGIN_USER', status: 'RESOLVED', data, error: null }
+}
+
+export function actionRejectedUserLogin(error){
+  return { type: 'LOGIN_USER', status: 'REJECTED', data:null, error }
+}

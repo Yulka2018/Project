@@ -1,19 +1,18 @@
-import Income from "../Income/Income.js";
+import NewCategory from "../Costs/NewCategory.js";
 import {connect}   from 'react-redux';
 import {authHeader} from '../Main/HeaderJwt.js';
 import {sendDataPending, sendDataResolved, sendDataRejected} from './ActionCreators.js'
 
 
-const addIncome = (categories, date, sum, comments) => {
-    console.log(categories, date, sum)
+const addCategory = (categories, type) => {
+    console.log(categories)
+    
     return dispatch => {
-      let user = JSON.parse(localStorage.getItem('user'))
       let fetchBody
-      if (user){
-      fetchBody = JSON.stringify({ categories: categories, date: date, sum: sum, comment: comments, user: user.nick})
-      }
+      type == 'costs' ? fetchBody = JSON.stringify({ categories: categories, costs: true, income:  false}) : 
+      fetchBody = JSON.stringify({ categories: categories, costs: false, income:  true})
       console.log(fetchBody)
-      let promise = fetch("http://localhost:8000/income",
+      let promise = fetch("http://localhost:8000/categories",
         {
           method: 'POST',
           body: fetchBody,
@@ -26,7 +25,6 @@ const addIncome = (categories, date, sum, comments) => {
     }
   }
   
-   const ConnectIncome = connect (null, {onSend: addIncome})(Income)
+   const ConnectCategory = connect (null, {addCategory: addCategory})(NewCategory)
   
-  export default ConnectIncome;
-  
+  export default ConnectCategory;

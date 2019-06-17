@@ -1,14 +1,12 @@
 import {getCategoriesPending, getCategoriesResolved,getCategoriesRejected} from './ActionCreators.js';
+import {authHeader} from '../Main/HeaderJwt.js';
 
 export const getCategories = () => {
       return dispatch => {
         let promise = fetch("http://localhost:8000/categories",
           {
             method: 'GET',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            }
+            headers:authHeader()
           }
         )
         dispatch(getCategoriesPending())
