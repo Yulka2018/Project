@@ -1,13 +1,13 @@
 export function sendDataPending(){
-    return {type: 'SEND_STATUS', sendStatus: 'PENDING'}
+    return {type: 'SEND_STATUS', sendStatus: 'PENDING',data: null, error: null}
 }
 
-export function sendDataResolved(){
-  return {type: 'SEND_STATUS', sendStatus: 'RESOLVED'}
+export function sendDataResolved(payload){
+  return {type: 'SEND_STATUS', sendStatus: 'RESOLVED',  payload, error: null}
 }
 
-export function sendDataRejected(){
-  return {type: 'SEND_STATUS', sendStatus: 'REJECTED'}
+export function sendDataRejected( error){
+  return {type: 'SEND_STATUS', sendStatus: 'REJECTED',data: null, error:  error}
 }
 
 export function getCategoriesPending(){

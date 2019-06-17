@@ -101,7 +101,7 @@ class Chart extends Component {
 
     onchangeBar(event) {
         this.setState({
-            chartType:  event.target.value
+            chartType: event.target.value
         })
     }
 
@@ -111,9 +111,9 @@ class Chart extends Component {
         let arr1 = JSON.stringify(nextProps.costs.map(obj => JSON.stringify(obj)))
         let arr2 = JSON.stringify(this.props.costs.map(obj => JSON.stringify(obj)))
         console.log((JSON.stringify(arr1) !== JSON.stringify(arr2)) ? 'не равно' : 'равно');
-        if(arr1 !== arr2 || this.state.labels.length == 0 || this.state.datasets[0].data == 0){
-        this.setState(state => ({ ...state, labels: this.getLabels() }))
-        this.setState(state => ({ ...state, datasets: this.getCost() }))
+        if (arr1 !== arr2 || this.state.labels.length == 0 || this.state.datasets[0].data == 0) {
+            this.setState(state => ({ ...state, labels: this.getLabels() }))
+            this.setState(state => ({ ...state, datasets: this.getCost() }))
         }
     }
 
@@ -123,17 +123,24 @@ class Chart extends Component {
         return (
             <div>
                 <Header2 />
-                <div>
-                    <input type="date" onChange={this.firstDate} defaultValue={res} />
-                    <input type="date" onChange={this.lastDate} defaultValue={res} />
+                <div className='Main-Chart'>
+                    <div className='Chart'>
+                        <div className='Container'>
+                            <div className="Period">
+                                <input type="date" onChange={this.firstDate} defaultValue={res} />
+                                <input type="date" onChange={this.lastDate} defaultValue={res} />
+
+                            </div>
+                            <div className='ChartType'>
+                                <input type='radio' name='chart' value='Doughnut' defaultChecked onClick={this.onchangeDoughnut} /><label htmlFor='Doughnut'>Doughnut</label>
+                                <input type='radio' name='chart' value='Bar' onClick={this.onchangeBar} /><label htmlFor='Bar'>Bar</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <input type='radio' name='chart' value='Doughnut'  defaultChecked onClick={this.onchangeDoughnut}/><label htmlFor='Doughnut'>Doughnut</label>
-                    <input type='radio' name='chart' value='Bar' onClick={this.onchangeBar}/><label htmlFor='Bar'>Bar</label>
-                </div>
-                {this.state.chartType === 'Doughnut' ? 
+                {this.state.chartType === 'Doughnut' ?
                     <Doughnut data={this.state} /> :
-                        <Bar data={this.state} width={100} height={50} options={this.state.options} />}
+                    <Bar data={this.state} width={100} height={50} options={this.state.options} />}
             </div >
         )
     }

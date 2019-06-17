@@ -20,8 +20,16 @@ const addCategory = (categories, type) => {
         }
       )
       dispatch(sendDataPending())
-      promise.then(() => dispatch(sendDataResolved()))
-        .catch(() => dispatch(sendDataRejected()))
+      promise.then (res =>
+        {
+          return res.json().then(data => {
+            console.log(data)
+              if (!res.ok) {
+                 return dispatch(sendDataRejected(data));
+              }
+
+              return  dispatch(sendDataResolved(data));
+          })}) 
     }
   }
   

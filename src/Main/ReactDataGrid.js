@@ -7,12 +7,7 @@ import { sendDataPending, sendDataResolved, sendDataRejected } from '../Redux/Ac
 import { authHeader } from '../Main/HeaderJwt.js';
 import changeCosts from '../Redux/ChangeCosts.js';
 
-const defaultColumnProperties = {
-    width: 120,
-    filterable: true,
-    sortable: true,
-    editable: true,
-};
+
 
 const selectors = Data.Selectors;
 const {
@@ -23,29 +18,19 @@ const {
 } = Filters;
 
 
- let { DropDownEditor } = Editors;
-// const issueTypes = [
-//   { id: "Food", value: "Food" },
-//   { id: "Cinema", value: "Cinema" },
-//   { id: "Home", value: "Home" }
-// ];
-
-// //const Editor = connect(state => ({ options: state.getCategories.categories.map(data => ({ id: data.id, value: data.name }))}))(DropDownEditor);
-// const IssueTypeEditor = <DropDownEditor options = {issueTypes} />;
-
-
+let { DropDownEditor } = Editors;
 
 class DataGrid extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            columns: [{ key: 'id', name: 'Id',filterable: true, filterRenderer: SingleSelectFilter },
-            { key: 'date', name: 'Date',filterable: true, filterRenderer: SingleSelectFilter },
-            { key: 'issueType', name: 'Category',filterable: true, filterRenderer: SingleSelectFilter, editable: true },
-            { key: 'sum', name: 'Sum',filterable: true, filterRenderer: SingleSelectFilter, editable: true }],
+            columns: [{ key: 'id', name: 'Id', filterable: true, filterRenderer:  NumericFilter },
+            { key: 'date', name: 'Date', filterable: true, filterRenderer: SingleSelectFilter },
+            { key: 'issueType', name: 'Category', filterable: true, filterRenderer: SingleSelectFilter, editable: true },
+            { key: 'sum', name: 'Sum', filterable: true, filterRenderer: SingleSelectFilter, editable: true }],
             rows: [],
             filters: {},
-            
+
         }
 
         this.getRow = this.getRow.bind(this)
@@ -54,9 +39,9 @@ class DataGrid extends Component {
         this.handleFilterChange = this.handleFilterChange.bind(this)
         this.rowsUpdated = this.rowsUpdated.bind(this)
         this.getEditor = this.getEditor.bind(this)
-
+        this.emptyRowsView = this.emptyRowsView.bind(this)
     }
-    
+
     handleFilterChange = filter => filters => {
         const newFilters = { ...filters };
         if (filter.filterTerm) {
@@ -64,13 +49,13 @@ class DataGrid extends Component {
         } else {
             delete newFilters[filter.column.key];
         }
-        return  {filters: newFilters};
+        return { filters: newFilters };
     };
 
     getRow() {
-        let arr = this.props.costs ? this.props.costs.slice(this.props.costs.length - 30, this.props.costs.length) : null
-
-        const rows = arr ? arr.map(data => ({ id: data.id, date: data.date, issueType: data.Category.name, sum: data.costsSum })) : null
+        let id = 0
+        let arr = this.props.costs ? this.props.costs.slice(this.props.costs.length - 50, this.props.costs.length) : null
+        const rows = arr ? arr.map((data, index) => ({ id: index+1, id2: data.id, date: data.date, issueType: data.Category.name, sum: data.costsSum })) : null
         return { rows: rows }
     }
 
@@ -87,50 +72,62 @@ class DataGrid extends Component {
     }
 
 
-   rowsUpdated = ({ fromRow, toRow, updated }) => {
-       const rows = this.state.rows.slice();
-    for (let i = fromRow; i <= toRow; i++) {
-        rows[i] = { ...rows[i], ...updated };
-        console.log( rows[i]) 
-        return this.props.onGridRowsUpdated(rows[i].issueType, rows[i].sum, rows[i].id )}}
+    rowsUpdated = ({ fromRow, toRow, updated }) => {
+        const rows = this.state.rows.slice();
+        for (let i = fromRow; i <= toRow; i++) {
+            rows[i] = { ...rows[i], ...updated };
+            console.log(rows[i])
+            return this.props.onGridRowsUpdated(rows[i].issueType, rows[i].sum, rows[i].id2)
+        }
+    }
 
-    getEditor(){
-        let arr = this.props.categories ? this.props.categories.map(data => ({ id: data.name, value: data.name }) ) : null
-       let IssueTypeEditor = <DropDownEditor options={arr} />;
+    getEditor() {
+        let arr = this.props.categories ? this.props.categories.filter(data => data && data.costs == true) : null
+       // console.log(arr)
+        let arr2 = arr.map(data => ({ id: data.name, value: data.name }))
+        let IssueTypeEditor = <DropDownEditor options={arr2} />;
         return IssueTypeEditor
     }
 
+    emptyRowsView = () => {
+        const message = "Loading...";
+        return (
+            <div
+                style={{ textAlign: "center", backgroundColor: "#ddd", padding: "100px" }}
+            >
+                {/* <img src="./logo.png" alt={message} /> */}
+                <h3>{message}</h3>
+            </div>
+        );
+    };
+
     componentWillReceiveProps() {
-        //const IssueTypeEditor = <DropDownEditor options={issueTypes} />;
         this.setState(this.getRow())
         const columns = [...this.state.columns]
-        columns[2].editor =  this.getEditor()
-        this.setState({columns: columns})
-        // const array = this.state.columns.slice();
-        // array[2].editor = this.getEditor();
-        // this.setState({ array });
+        columns[2].editor = this.getEditor()
+        this.setState({ columns: columns })
     }
 
     render() {
-        console.log(this.state.columns[2])
-        console.log(this.state.columns[2].editor)
-        console.log(this.state.columns[2].editor && this.state.columns[2].editor.props)
         const filteredRows = this.getRows(this.state.rows, this.state.filters);
         return (
             <div>
-            { this.state.columns[2].editor && (this.state.columns[2].editor.props.options.length > 0) ? 
-            <ReactDataGrid
-                columns={this.state.columns}
-                rowGetter={i => filteredRows[i]}
-                toolbar={<Toolbar enableFilter={true} />}
-                onAddFilter={filter => this.setState(this.handleFilterChange(filter))}
-                onClearFilters={() => this.setState({ filters: {} })}
-                getValidFilterValues={columnKey => this.getValidFilterValues(this.state.rows, columnKey)}
-               rowsCount={filteredRows.length}
-                minHeight={500}
-                onGridRowsUpdated={this.rowsUpdated}
-               enableCellSelect={true}/>
-         : 'loading...'}
+                {this.state.columns[2].editor && (this.state.columns[2].editor.props.options.length > 0) ?
+                    <ReactDataGrid
+                        columns={this.state.columns}
+                        rowGetter={i => filteredRows[i]}
+                        toolbar={<Toolbar enableFilter={true} />}
+                        onAddFilter={filter => this.setState(this.handleFilterChange(filter))}
+                        onClearFilters={() => this.setState({ filters: {} })}
+                        getValidFilterValues={columnKey => this.getValidFilterValues(this.state.rows, columnKey)}
+                        rowsCount={filteredRows.length}
+                        minHeight={500}
+                        onGridRowsUpdated={this.rowsUpdated}
+                        enableCellSelect={true}
+                        emptyRowsView={this.emptyRowsView}
+                    />
+
+                    : null}
             </div>
         )
     }

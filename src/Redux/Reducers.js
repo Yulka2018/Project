@@ -6,11 +6,15 @@ import {getIncome} from './GetIncome.js';
 
 let sendDataReducer = (state,action) => {
     if (state === undefined){
-        return {sendStatus: ''}
+        return {sendStatus: '', message: ''}
     }
     if (action.type === "SEND_STATUS"){
-        console.log(action.sendStatus)
-        return {sendStatus: action.sendStatus}
+      let msg
+      if(action.sendStatus === 'RESOLVED'){
+        msg = action.payload
+      }
+      console.log(action.payload)
+        return {sendStatus: action.sendStatus, message: msg}
     }
     return state
 }

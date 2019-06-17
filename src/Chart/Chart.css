@@ -1,0 +1,33 @@
+.Period > input {
+    font-size: 100%;
+    border: 1px;
+    border-radius: 7px;
+    height: 3vh;
+    -webkit-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+    -moz-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+    box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+}
+
+.Container{
+    display: grid;
+    justify-content: center;
+    grid-gap: 10px;
+    text-align: center;
+    
+}
+.Main-Chart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Chart{
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    width: 60%;
+
+}
+.Period > input{
+    margin: 5px;
+}

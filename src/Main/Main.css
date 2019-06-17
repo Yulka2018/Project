@@ -7,7 +7,7 @@
     align-items: center;
     font-size: 12pt;
     font-weight: bold;
-    margin: 20px;
+    margin: 10px;
 }
 
 .mainbtn {
@@ -19,7 +19,6 @@
   padding: 5px 10px;
   font-size: 12px;
   font-weight: bold;
-  font-family: 'Montserrat', sans-serif;
   transition: 0.4s ease-in-out;
   border-radius: 10px;
   color: rgb(45, 68, 95);
@@ -31,14 +30,14 @@
 }
 .main-container{
   display: grid;
-  grid-template-columns:  1fr 5fr;
+  grid-template-columns:  1fr 1fr;
   grid-gap: 20px;
   margin: 20px;
 }
 .main-right{
     /* margin-top:  20px; */
     display: grid;
-    grid-template-rows:  8fr 1fr;
+    grid-template-rows:  15fr 1fr;
     grid-gap: 10px;
     /* align-items: center; */
     grid-auto-flow: column;

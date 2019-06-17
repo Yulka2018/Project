@@ -19,7 +19,7 @@ class Header extends Component {
                 </div>)
         else return (
             <div className='Header'>
-                <h4>hi {userS.nick}</h4>
+                <h4>Hi, {userS.nick}</h4>
                 <Balance />
                 <div></div>
                 <Spent />

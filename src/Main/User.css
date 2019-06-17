@@ -1,5 +1,32 @@
-.user{
+.user {
     display: grid;
     grid-row: 1fr 1fr;
     grid-gap: 20px;
+    
 }
+.NewUser {
+    text-align: center;
+    display: grid;
+   grid-gap: 5px;
+   justify-content: center;
+}
+ .NewUser>input{
+   font-size: 100%;
+   border: 1px;
+    border-radius: 7px;
+    height: 3vh;
+    -webkit-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+    -moz-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+    box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+}
+.NewUser>button{ 
+    font-size: 100%;
+    border-radius: 7px;
+    height: 5vh;
+    -webkit-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+    -moz-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+    box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+}
+
+ .NewUser >input:invalid:not(:placeholder-shown) { box-shadow: 7px 9px 21px -1px red;}
+ .NewUser >input:valid:not(:placeholder-shown) {box-shadow:7px 9px 21px -1px green;}

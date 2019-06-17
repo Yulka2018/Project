@@ -4,7 +4,8 @@ import {authHeader} from '../Main/HeaderJwt.js';
 import {sendDataPending, sendDataResolved, sendDataRejected} from './ActionCreators.js'
 
 
-const addIncome = (categories, date, sum, comments) => {
+const addIncome = (categories, date, sum, comments, event) => {
+  event.preventDefault()
     console.log(categories, date, sum)
     return dispatch => {
       let user = JSON.parse(localStorage.getItem('user'))
@@ -21,8 +22,16 @@ const addIncome = (categories, date, sum, comments) => {
         }
       )
       dispatch(sendDataPending())
-      promise.then(() => dispatch(sendDataResolved()))
-        .catch(() => dispatch(sendDataRejected()))
+      promise.then (res =>
+        {
+          return res.json().then(data => {
+            console.log(data)
+              if (!res.ok) {
+                 return dispatch(sendDataRejected(data));
+              }
+
+              return  dispatch(sendDataResolved(data));
+          })})     
     }
   }
   

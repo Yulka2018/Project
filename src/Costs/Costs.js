@@ -42,13 +42,6 @@ class Costs extends Component {
         this.setState({ comment: comment })
     };
 
-    // today() {
-    //     let d = new Date();
-    //     let currDate = d.getDate();
-    //     let currMonth = d.getMonth() + 1;
-    //     let currYear = d.getFullYear();
-    //     return currYear + "-" + ((currMonth < 10) ? '0' + currMonth : currMonth) + "-" + ((currDate < 10) ? '0' + currDate : currDate).toLocaleString();
-    // } 
 
     render() {
         let res = today()
@@ -61,7 +54,7 @@ class Costs extends Component {
                     <input type='text' placeholder='comments' onChange={this.commentOnchange} />
                     <input type="date" onChange={this.dateOnchange} defaultValue={res}  />
                     <input type='text' onChange={this.sumOnchange} />
-                    <button onClick={() => this.props.onSend2(this.state.categories, this.state.date, this.state.sum, this.state.comment)}>OK</button>
+                    <button onClick={() => this.state.sum && this.props.onSend2(this.state.categories, this.state.date, this.state.sum, this.state.comment)}>OK</button>
             </div>
         )
     }

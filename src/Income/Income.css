@@ -1,6 +1,43 @@
-.Income-container{
+.Сontainer{
     display: grid;
-    /* //grid-template-rows: 1fr 1fr 1fr fr; */
+    justify-content: center;
+    grid-gap: 5px;
+    
+}
+.Main-Income{
+    display: flex;
+    justify-content: center;
     align-items: center;
-    justify-items: center;
+}
+
+.Income{
+    background-color: aliceblue;
+    padding: 40px;
+    width: 60%;
+    min-height: 40vh;
+    -webkit-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+    -moz-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+    box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+}
+.Сontainer > h1{
+    text-align: center;
+}
+.Сontainer > input {
+    font-size: 100%;
+    border: 1px;
+    border-radius: 7px;
+    height: 3vh;
+    -webkit-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+    -moz-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+    box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+}
+.Сontainer > button {
+    font-size: 100%;
+   border: 1px;
+    border-radius: 7px;
+    height: 3vh;
+    width: 25%;
+    -webkit-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+    -moz-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+    box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
 }

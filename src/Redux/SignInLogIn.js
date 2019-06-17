@@ -2,7 +2,8 @@ import User from '../Main/User';
 import {connect}   from 'react-redux';
 import {actionPendingUser, actionResolvedUser, actionRejectedUser, actionPendingUserLogin, actionResolvedUserLogin, actionRejectedUserLogin} from './ActionCreators.js'
 
-function createUser (nick, email, pass){
+function createUser (nick, email, pass, event){
+  event.preventDefault()
     return dispatch => {
       let promise = fetch("http://localhost:8000/users",
                  {
@@ -26,7 +27,8 @@ function createUser (nick, email, pass){
    }
  }
  
- function userLogin(nick, pass){
+ function userLogin(nick, pass, event){
+  event.preventDefault()
     return dispatch => {
       let promise = fetch('http://localhost:8000/authenticate', {
                                 method: 'POST',
