@@ -57,7 +57,7 @@ class Income extends Component {
                         <form className='Сontainer'>
                             <h1  >Income</h1>
                             <div className='checbox'>
-                                    {this.props.data ?
+                                  {this.props.data ?
                                         this.props.data.map(categories =>
                                             categories.income && categories.name && <div key={categories.id}> <input type='radio' name='income' value={categories.name}
                                                 onClick={this.onchangeCategories} required /><label htmlFor={categories.name}>{categories.name}</label></div>) : null}

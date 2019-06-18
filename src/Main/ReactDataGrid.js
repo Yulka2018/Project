@@ -25,9 +25,9 @@ class DataGrid extends Component {
         super(props)
         this.state = {
             columns: [{ key: 'id', name: 'Id', filterable: true, filterRenderer:  NumericFilter },
-            { key: 'date', name: 'Date', filterable: true, filterRenderer: SingleSelectFilter },
-            { key: 'issueType', name: 'Category', filterable: true, filterRenderer: SingleSelectFilter, editable: true },
-            { key: 'sum', name: 'Sum', filterable: true, filterRenderer: SingleSelectFilter, editable: true }],
+            { key: 'date', name: 'Date', filterable: true, filterRenderer: SingleSelectFilter},
+            { key: 'issueType', name: 'Category', filterable: true, filterRenderer: SingleSelectFilter, editable: true},
+            { key: 'sum', name: 'Sum', filterable: true, filterRenderer: SingleSelectFilter, editable: true}],
             rows: [],
             filters: {},
 
@@ -93,7 +93,7 @@ class DataGrid extends Component {
         const message = "Loading...";
         return (
             <div
-                style={{ textAlign: "center", backgroundColor: "#ddd", padding: "100px" }}>
+                style={{ textAlign: "center", backgroundColor: "#ddd"}}>
                 <img src="../cat.jpg" alt={message} />
                 <h3>{message}</h3>
             </div>
@@ -120,7 +120,7 @@ class DataGrid extends Component {
                         onClearFilters={() => this.setState({ filters: {} })}
                         getValidFilterValues={columnKey => this.getValidFilterValues(this.state.rows, columnKey)}
                         rowsCount={filteredRows.length}
-                        // minHeight={500}
+                        minHeight={500}
                         onGridRowsUpdated={this.rowsUpdated}
                         enableCellSelect={true}
                         emptyRowsView={this.emptyRowsView}

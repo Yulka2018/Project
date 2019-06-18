@@ -33,4 +33,6 @@
     -webkit-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
     -moz-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
     box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
+    background-color:rgb(8, 32, 51);
+    color: rgb(204, 221, 245);
 }

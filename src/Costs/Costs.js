@@ -51,10 +51,10 @@ class Costs extends Component {
                     <select onChange={this.onchangeCategories}>{this.props.data.map(categories =>
                         categories.costs && <option key = {categories.id} value={categories.name}
                             >{categories.name}</option>)}</select> : null}
-                    <input type='text' placeholder='comments' onChange={this.commentOnchange} />
-                    <input type="date" onChange={this.dateOnchange} defaultValue={res}  />
-                    <input type='text' onChange={this.sumOnchange} />
-                    <button onClick={() => this.state.sum && this.props.onSend2(this.state.categories, this.state.date, this.state.sum, this.state.comment)}>OK</button>
+                   <input type='text' placeholder='comments' onChange={this.commentOnchange} />
+                   <input type="date" onChange={this.dateOnchange} defaultValue={res}  />
+                   <input type='text' placeholder='sum' onChange={this.sumOnchange} />
+                   <button onClick={() => this.state.sum && this.props.onSend2(this.state.categories, this.state.date, this.state.sum, this.state.comment)}>OK</button>
             </div>
         )
     }

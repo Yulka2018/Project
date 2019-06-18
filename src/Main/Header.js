@@ -13,16 +13,20 @@ class Header extends Component {
             return (
                 <div className='Header'>
                     <Link to='/users'>SIGH UP</Link>
+                     <div>
                     <Balance />
-                    <div></div>
+                    
                     <Spent />
+                    </div>
                 </div>)
         else return (
             <div className='Header'>
                 <h4>Hi, {userS.nick}</h4>
+                <div>
                 <Balance />
-                <div></div>
+                
                 <Spent />
+                </div>
             </div>
         )
     }

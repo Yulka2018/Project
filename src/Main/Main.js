@@ -18,8 +18,9 @@ class Main extends Component {
                         <Link to='/statistic' className='mainbtn'>Statistic</Link>
                     </div>
                     <div className='main-right' >
-                        <DataGrid />
-                        <ConnectCosts />
+                       <div > <DataGrid /> </div>
+                       <div>
+                        <ConnectCosts /></div>
                     </div>
                 </div>
             </div>

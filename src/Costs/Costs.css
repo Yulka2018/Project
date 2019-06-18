@@ -1,35 +1,40 @@
 .Costs-container{
     display: flex;
     min-height: 30px;
+    margin: 10px 0;
 }
 .Costs-container > input{
-    font-size: 100%;
+  
     border: 1px;
-    border-radius: 7px;
-    height: 3vh;
+     border-radius: 3px;
+    height: 25px;
     -webkit-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
     -moz-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
     box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
     margin: 5px;
-}
+    
+} 
 select{
-    font-size: 100%;
+  
     border: 1px;
-    border-radius: 7px;
-    height: 3vh;
+    border-radius: 3px;
+    height: 25px;
     -webkit-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
     -moz-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
     box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
     margin: 5px;
 }
 .Costs-container > button{
-    font-size: 100%;
+
     border: 1px;
-    border-radius: 7px;
-    height: 3vh;
+    border-radius: 25%;
+    height: 28px;
     -webkit-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
     -moz-box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
     box-shadow: 7px 9px 21px -1px rgba(0,0,0,0.6);
     margin: 5px;
-    width: 8vh;
+    width: 5vh;
+    padding: 0;
+    background-color:rgb(8, 32, 51);
+    color: rgb(204, 221, 245);
 }
