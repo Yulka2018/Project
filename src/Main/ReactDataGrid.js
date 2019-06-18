@@ -25,9 +25,9 @@ class DataGrid extends Component {
         super(props)
         this.state = {
             columns: [{ key: 'id', name: 'Id', filterable: true, filterRenderer:  NumericFilter },
-            { key: 'date', name: 'Date', filterable: true, filterRenderer: SingleSelectFilter},
-            { key: 'issueType', name: 'Category', filterable: true, filterRenderer: SingleSelectFilter, editable: true},
-            { key: 'sum', name: 'Sum', filterable: true, filterRenderer: SingleSelectFilter, editable: true}],
+            { key: 'date', name: 'Date', filterable: true, filterRenderer: SingleSelectFilter,},
+            { key: 'issueType', name: 'Category', filterable: true, filterRenderer: MultiSelectFilter, editable: true},
+            { key: 'sum', name: 'Sum', filterable: true, filterRenderer: MultiSelectFilter, editable: true}],
             rows: [],
             filters: {},
 
@@ -42,13 +42,14 @@ class DataGrid extends Component {
         this.emptyRowsView = this.emptyRowsView.bind(this)
     }
 
-    handleFilterChange = filter => filters => {
-        const newFilters = { ...filters };
+    handleFilterChange = filter  => {
+        const newFilters = { ...this.state.filters };
         if (filter.filterTerm) {
             newFilters[filter.column.key] = filter;
         } else {
             delete newFilters[filter.column.key];
         }
+        console.log(newFilters)
         return { filters: newFilters };
     };
 
@@ -90,7 +91,7 @@ class DataGrid extends Component {
     }
 
     emptyRowsView = () => {
-        const message = "Loading...";
+        const message = "No data";
         return (
             <div
                 style={{ textAlign: "center", backgroundColor: "#ddd"}}>
@@ -109,6 +110,7 @@ class DataGrid extends Component {
 
     render() {
         const filteredRows = this.getRows(this.state.rows, this.state.filters);
+        console.log(this.state.filters)
         return (
             <div>
                 {this.state.columns[2].editor && (this.state.columns[2].editor.props.options.length > 0) ?

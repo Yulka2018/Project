@@ -129,10 +129,10 @@ setInterval(
 
 setInterval(
   () => store.dispatch(getCosts()),
-  9000
+  2000
 )
 
 setInterval(
   () => store.dispatch(getIncome()),
-  9000
+  2000
 )

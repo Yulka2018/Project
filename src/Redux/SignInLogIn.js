@@ -56,3 +56,8 @@ function createUser (nick, email, pass, event){
 
  const ConnectedUser = connect (null, {onSendSignin: createUser, onSendLogin: userLogin})(User)
  export default ConnectedUser;
+
+
+ export function logOut(){
+  localStorage.clear();
+}
