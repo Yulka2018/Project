@@ -12,7 +12,7 @@ class Header extends Component {
         if (!userS)
             return (
                 <div className='Header'>
-                    <Link to='/users'>User</Link>
+                    <Link to='/users'>SIGH UP</Link>
                     <Balance />
                     <div></div>
                     <Spent />

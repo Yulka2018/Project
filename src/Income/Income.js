@@ -67,7 +67,7 @@ class Income extends Component {
                             <input type='text' placeholder='comments' onChange={this.commentChange} value = {this.state.comments}/>
                             <button onClick={(event) => this.state.categories && this.state.sum &&
                                 this.props.onSend(this.state.categories, this.state.date, this.state.sum, this.state.comments, event)}>OK</button>
-                               {this.props.sendData.message ?  <h3>{this.props.sendData.message.message}</h3> : null}
+                               {this.props.sendData.message ?  <h3>{this.props.sendData.message.msgIncome}</h3>  : null}
                         </form>
                         
                     </div> 

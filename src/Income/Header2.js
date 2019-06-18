@@ -9,7 +9,7 @@ class Header2 extends Component{
     render(){
         return(
             <div className = 'Header'>
-                    <Link to = '/'>Back</Link>
+                    <Link to = '/'> <img src="../back2.png" alt='Back' /></Link>
                     <div> 
                         <Balance/>
                         <Spent/>

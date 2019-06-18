@@ -44,7 +44,7 @@ class NewCategory extends Component {
                             <input type='text' onChange={this.onchangeCategory} placeholder='Category' />
                             <button onClick={() => this.state.category && this.state.type &&  
                                 this.props.addCategory(this.state.category, this.state.type)}>OK</button>
-                                {this.props.sendData.message ?  <h3>{this.props.sendData.message.message}</h3> : null}
+                                {this.props.sendData.message ?  <h3>{this.props.sendData.message.msgCategory}</h3> : null}
                         </div>
                     </div>
                 </div>

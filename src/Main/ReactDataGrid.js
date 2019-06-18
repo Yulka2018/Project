@@ -93,9 +93,8 @@ class DataGrid extends Component {
         const message = "Loading...";
         return (
             <div
-                style={{ textAlign: "center", backgroundColor: "#ddd", padding: "100px" }}
-            >
-                {/* <img src="./logo.png" alt={message} /> */}
+                style={{ textAlign: "center", backgroundColor: "#ddd", padding: "100px" }}>
+                <img src="../cat.jpg" alt={message} />
                 <h3>{message}</h3>
             </div>
         );
@@ -121,7 +120,7 @@ class DataGrid extends Component {
                         onClearFilters={() => this.setState({ filters: {} })}
                         getValidFilterValues={columnKey => this.getValidFilterValues(this.state.rows, columnKey)}
                         rowsCount={filteredRows.length}
-                        minHeight={500}
+                        // minHeight={500}
                         onGridRowsUpdated={this.rowsUpdated}
                         enableCellSelect={true}
                         emptyRowsView={this.emptyRowsView}

@@ -1,5 +1,8 @@
 body{
   background-color:  rgb(150, 171, 189);
+  background-image: url('/fon2.jpg');
+  background-size: cover; 
+  color: rgb(45, 68, 95);
   margin: 20px;
   font-family: 'Montserrat', sans-serif;
 }
