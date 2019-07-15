@@ -19,7 +19,9 @@ class Chart extends Component {
             }],
             period: {
                 firstDate: today(),
+                prevFistDate: today(),
                 lastDate: today(),
+                prevLastDate: today(),
             },
             options: {
                 scales: {
@@ -53,6 +55,7 @@ class Chart extends Component {
     getLabels() {
         let firstDate = new Date(this.state.period.firstDate)
         let lastDate = new Date(this.state.period.lastDate)
+        console.log(firstDate,lastDate )
         let arr = this.props.costs.filter(costs => new Date(costs.date) >= firstDate && new Date(costs.date) <= lastDate)
         console.log(arr)
         let arr2 = arr.map(costs => costs.Category && costs.Category.name)
@@ -63,7 +66,7 @@ class Chart extends Component {
     }
 
     getCost() {
-        let color = []
+        let color = this.state.datasets[0].backgroundColor
         let costsArr = []
         let firstDate = new Date(this.state.period.firstDate)
         let lastDate = new Date(this.state.period.lastDate)
@@ -83,14 +86,16 @@ class Chart extends Component {
 
     firstDate(event) {
         let date = event.target.value
+        let prevFistDate = this.state.period.firstDate
         console.log(date)
-        this.setState((prevState) => ({ period: { ...prevState.period, firstDate: date } }))
+        this.setState((prevState) => ({ period: { ...prevState.period, firstDate: date, prevFistDate:  prevFistDate } }))
     };
 
     lastDate(event) {
         let date = event.target.value
-        //console.log(date)
-        this.setState((prevState) => ({ period: { ...prevState.period, lastDate: date } }))
+        let prevLastDate = this.state.period.lastDate
+        console.log(date)
+        this.setState((prevState) => ({ period: { ...prevState.period, lastDate: date, prevLastDate: prevLastDate }}))
     };
 
     onchangeDoughnut(event) {
@@ -107,15 +112,24 @@ class Chart extends Component {
 
     componentWillReceiveProps(nextProps) {
         console.log(nextProps)
-        console.log(this.state.labels)
+        console.log(this.state.datasets)
+        let first1 = new Date(this.state.period.firstDate).getTime();
+        let first2 = new Date(this.state.period.prevFistDate).getTime();
+        let last1= new Date(this.state.period.lastDate).getTime();
+        let last2 = new Date(this.state.period.prevLastDate).getTime();
+        console.log(first1, first2, last1, last2 )
+        console.log((first1 !== first2) ? 'не равно' : 'равно');
         let arr1 = JSON.stringify(nextProps.costs.map(obj => JSON.stringify(obj)))
         let arr2 = JSON.stringify(this.props.costs.map(obj => JSON.stringify(obj)))
         console.log((JSON.stringify(arr1) !== JSON.stringify(arr2)) ? 'не равно' : 'равно');
-        if (arr1 !== arr2 || this.state.labels.length == 0 || this.state.datasets[0].data == 0) {
+        if (arr1 != arr2 || this.state.labels.length == 0 || this.state.datasets[0].data == 0 ||
+             (first1 !== first2) || (last1 !== last2))
+         {
             this.setState(state => ({ ...state, labels: this.getLabels() }))
             this.setState(state => ({ ...state, datasets: this.getCost() }))
         }
     }
+
 
     render() {
         let res = today()
